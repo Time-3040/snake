@@ -1,19 +1,101 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Static Website with Action Button</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<title>Skibidi Toliet</title>
+<link rel="icon" type="image/x-icon" href="Icon_skibidi.jpg">
+
+<style>
+canvas {
+display: block;
+position: absolute;
+border: 5px solid  #009BFF;
+margin: auto;
+top: 0;
+bottom: 0;
+right: 0;
+left: 0;
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to My Static Website</h1>
-        <p>Click the button below to initiate an action.</p>
-        <button id="initiateButton" onclick="initiateAction()">Initiate</button>
-        <p id="message" class="hidden"></p>
-    </div>
+<script>
+var
+COLS = 26,
+ROWS = 26,
+EMPTY = 0,
+SNAKE = 1,
+FRUIT = 2,
+LEFT  = 0,
+UP    = 1,
+RIGHT = 2,
+DOWN  = 3,
+KEY_LEFT  = 37,
+KEY_UP    = 38,
+KEY_RIGHT = 39,
+KEY_DOWN  = 40,
+canvas,  
+ctx,  
+keystate, 
+frames,   
+score;  
+ 
+grid = {
+ 
+width: null,  
+height: null, 
+_grid: null,  
+ 
 
-    <script src="script.js"></script>
-</body>
-</html>
+init: function(d, c, r) {
+this.width = c;
+this.height = r;
+ 
+this._grid = [];
+for (var x=0; x < c; x++) {
+this._grid.push([]);
+for (var y=0; y < r; y++) {
+this._grid[x].push(d);
+}
+}
+},
+ 
+
+set: function(val, x, y) {
+this._grid[x][y] = val;
+},
+ 
+
+get: function(x, y) {
+return this._grid[x][y];
+}
+}
+ 
+ 
+snake = {
+ 
+direction: null, 
+last: null, 
+_queue: null,
+ 
+
+init: function(d, x, y) {
+this.direction = d;
+ 
+this._queue = [];
+this.insert(x, y);
+},
+ 
+
+insert: function(x, y) {
+
+this._queue.unshift({x:x, y:y});
+this.last = this._queue[0];
+},
+ 
+
+remove: function() {
+
+return this._queue.pop();
+... (164 lines left)
